@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 
+import static xyz.ghostletters.pulsar.RabbitSourceConfig.EXCHANGE_NAME;
 import static xyz.ghostletters.pulsar.RabbitSourceConfig.QUEUE_NAME;
 
 @ApplicationScoped
@@ -27,7 +28,7 @@ public class RabbitBindingConfig {
 
 
     public void onApplicationStart(@Observes StartupEvent event) {
-        // on application start prepare the queus and message listener
+        // on application start prepare the queues and message listener
         setupQueues();
     }
 
@@ -35,9 +36,9 @@ public class RabbitBindingConfig {
         try {
             Connection connection = rabbitMQClient.connect();
             channel = connection.createChannel();
-            channel.exchangeDeclare(QUEUE_NAME, BuiltinExchangeType.TOPIC, true);
+            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC, true);
             channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-            channel.queueBind(QUEUE_NAME, QUEUE_NAME, "#");
+            channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "#");
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }

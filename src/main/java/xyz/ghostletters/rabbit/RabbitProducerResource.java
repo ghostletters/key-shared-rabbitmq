@@ -11,17 +11,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Random;
 
+import static xyz.ghostletters.pulsar.RabbitSourceConfig.EXCHANGE_NAME;
 import static xyz.ghostletters.pulsar.RabbitSourceConfig.QUEUE_NAME;
 
 @ApplicationScoped
 @Path("/request")
 public class RabbitProducerResource {
 
-    @Channel(QUEUE_NAME)
+    @Channel(EXCHANGE_NAME)
     Emitter<CustomerEvent> quoteRequestEmitter;
 
     Random rand = new Random();
-
 //        @Scheduled(every = "2s")
     @GET
     @Produces(MediaType.TEXT_PLAIN)

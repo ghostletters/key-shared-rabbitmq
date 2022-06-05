@@ -17,6 +17,7 @@ import static xyz.ghostletters.pulsar.RandomMessageProducer.TOPIC_RAW;
 public class RabbitSourceConfig {
 
     public static final String QUEUE_NAME = "quote-requests";
+    public static final String EXCHANGE_NAME = "quote-exchange";
     private static final String RABBIT_SOURCE = "rabbit-source";
     private static final String PULSAR_VERSION = "2.10.0";
 
