@@ -1,0 +1,45 @@
+./bin/pulsar-admin topics list public/default
+
+./bin/pulsar-admin functions list --tenant public --namespace default
+
+
+./bin/pulsar-admin schemas get public/default/topic-raw
+./bin/pulsar-admin schemas get public/default/topic-with-key
+
+
+./bin/pulsar-admin topics delete public/default/topic-raw
+./bin/pulsar-admin topics delete public/default/topic-with-key
+
+./bin/pulsar-admin functions delete --tenant public --namespace default --name CustomerEventFunction
+./bin/pulsar-admin functions get --tenant public --namespace default --name CustomerEventFunction
+./bin/pulsar-admin functions stats --tenant public --namespace default --name CustomerEventFunction
+./bin/pulsar-admin functions status --tenant public --namespace default --name CustomerEventFunction
+./bin/pulsar-admin functions restart --tenant public --namespace default --name CustomerEventFunction
+
+
+./bin/pulsar-admin topics subscriptions public/default/topic-raw
+./bin/pulsar-admin topics subscriptions public/default/topic-with-key
+
+./bin/pulsar-admin topics unsubscribe public/default/topic-raw -f -s public/default/CustomerEventFunction
+
+
+./bin/pulsar-admin topics stats public/default/topic-raw
+./bin/pulsar-admin topics stats public/default/topic-with-key
+./bin/pulsar-admin topics terminate public/default/topic-raw
+
+
+
+./bin/pulsar-admin topics peek-messages public/default/topic-with-key -n 20 -s my-subscription
+
+
+
+
+./bin/pulsar-client consume public/default/topic-raw -s "manual-sub"
+
+
+./bin/pulsar-client produce public/default/topic-with-key --messages "hello-pulsar"
+
+./bin/pulsar-client produce public/default/topic-raw --messages "hello-pulsar"
+
+
+

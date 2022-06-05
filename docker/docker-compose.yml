@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  # https://pulsar.apache.org/docs/en/standalone/
+  pulsar:
+    image: apachepulsar/pulsar-all:2.10.0
+    hostname: pulsar
+    ports:
+      - "8080:8080"
+      - "6650:6650"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: bin/pulsar standalone
+
+#  rabbitmq:
+#    image: rabbitmq:3.9-management
+#    hostname: rabbitmq
+#    container_name: rabbitmq
+#    ports:
+#      - 5672:5672
+#      - 15672:15672
