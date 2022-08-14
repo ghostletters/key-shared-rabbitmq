@@ -1,11 +1,8 @@
 package xyz.ghostletters.setup;
 
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
 import io.quarkiverse.rabbitmqclient.RabbitMQClient;
 import io.quarkus.runtime.StartupEvent;
 
@@ -14,7 +11,6 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
 
 import static xyz.ghostletters.pulsar.RabbitSourceConfig.EXCHANGE_NAME;
 import static xyz.ghostletters.pulsar.RabbitSourceConfig.QUEUE_NAME;
@@ -25,7 +21,6 @@ public class RabbitBindingConfig {
     @Inject
     RabbitMQClient rabbitMQClient;
     private Channel channel;
-
 
     public void onApplicationStart(@Observes StartupEvent event) {
         // on application start prepare the queues and message listener
